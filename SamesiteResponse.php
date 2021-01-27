@@ -1,14 +1,9 @@
 <?php namespace Tomkirsch\Samesite;
 
 use CodeIgniter\HTTP\Response;
+use Tomkirsch\Samesite\SamesiteDetector;
 
 class SamesiteResponse extends Response{
-	
-	// determine if we can set samesite cookie
-	static function canDoSameSite():bool{
-		return version_compare(phpversion(), '7.3.0', '>=');
-	}
-	
 	protected $cookieSameSite = 'Lax';
 	
 	// override setCookie() to allow passing of the samesite parameter
@@ -103,7 +98,7 @@ class SamesiteResponse extends Response{
 			$params = array_values($params);
 			
 			// if setcookie() does not support samesite, then leave it out (set this in .htaccess instead)
-			if(!static::canDoSameSite()){
+			if(!SamesiteDetector::isPossible()){
 				array_pop($params);
 			}
 			setcookie(...$params);
