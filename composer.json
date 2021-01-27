@@ -1,0 +1,10 @@
+{
+    "name": "tomkirsch/samesite",
+    "type": "library",
+    "description": "SameSite cookies for CI4",
+	"license": "MIT",
+    "require": {
+        "php": ">=7.2",
+		"codeigniter4/framework": "^4"
+    }
+}
